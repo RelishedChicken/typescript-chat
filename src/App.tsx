@@ -1,6 +1,6 @@
 import './App.css';
 import { useState } from "react"
-import { io, Socket } from 'socket.io-client';
+import { io } from 'socket.io-client';
 import { ChatWindow } from './classes/ChatWindow';
 import { MessageAdder } from './classes/MessageAdder';
 import { uniqueNamesGenerator, animals } from 'unique-names-generator';
@@ -14,18 +14,16 @@ declare global{
     readonly date: Date;
   }
 
-  const socket:Socket;
-
 }
-
+  
+const socket = io('http://localhost:3000');
 const userName = uniqueNamesGenerator({dictionaries: [animals]});
 
 function App() {
 
-  const [allMessages, setMessages] = useState<Array<ChatMessage>>([]);  
-  const socket = io('http://localhost:3000');
+  const [allMessages, setMessages] = useState<Array<ChatMessage>>([]);
 
-  //Request all current messages on the server every 1000ms
+  //Listen for message broadcasts
   socket.on('sendMessages', (response:ChatMessage[]) => {
     if(response !== allMessages){
       console.log("got messages...");
