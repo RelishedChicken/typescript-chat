@@ -6,9 +6,9 @@ import { MessageAdder } from './classes/MessageAdder';
 declare global{ 
 
   interface ChatMessage {
-    id: number;
-    message: string;
-    date: Date;
+    readonly id: number;
+    readonly message: string;
+    readonly date: Date;
   }  
 
   interface ServerToClientEvents {
@@ -24,7 +24,7 @@ declare global{
 function App() {
 
   const allMessages:ChatMessage[]=[];  
-  const socket = io('http://localhost:5173');
+  const socket = io('http://localhost:3000');
 
   socket.on('connect', () => {
     console.log("connected!");
