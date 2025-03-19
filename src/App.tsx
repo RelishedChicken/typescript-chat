@@ -26,29 +26,28 @@ function App() {
   const allMessages:ChatMessage[]=[];  
   const socket = io('http://localhost:3000');
 
-  socket.on('connect', () => {
+  //Event to confirm a solid connection
+  /*socket.on('connect', () => {
     console.log("connected!");
-  });
+  });*/
 
-  socket.on('disconnect', () => {
+  //Event to say server dc
+  /*socket.on('disconnect', () => {
     console.log("disconnected!");
-  });
+  });*/
 
-  socket.on('message', () => {
-    //TODO handle adding message
-  });
-  
-  allMessages.push({
+  //Send current messages for testing purposes
+  socket.emit('message', {
     id: 1,
     message: "test message",
     date: new Date()
-  });  
+  });
 
+  //Request all current messages on the server
   setInterval(() => {
-    const start = Date.now();
-    socket.emit("ping", () => {
-        console.log(`pong (latency: ${Date.now() - start} ms)`);
-    });
+    socket.emit('getAllMessages', (response:ChatMessage[]) => {
+      console.log(response);
+    })  
   }, 1000);
     
   return (
