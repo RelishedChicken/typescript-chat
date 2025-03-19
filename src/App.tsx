@@ -1,60 +1,43 @@
 import './App.css';
-import { io } from 'socket.io-client';
+import { useState } from "react"
+import { io, Socket } from 'socket.io-client';
 import { ChatWindow } from './classes/ChatWindow';
 import { MessageAdder } from './classes/MessageAdder';
+import { uniqueNamesGenerator, animals } from 'unique-names-generator';
 
 declare global{ 
 
   interface ChatMessage {
     readonly id: number;
+    readonly author: string;
     readonly message: string;
     readonly date: Date;
-  }  
-
-  interface ServerToClientEvents {
-    hello: (val: string) => void;
   }
 
-  interface ClientToServerEvents {
-    ping: (cb: () => void) => void;
-  }
+  const socket:Socket;
 
 }
 
 function App() {
 
-  const allMessages:ChatMessage[]=[];  
+  const [allMessages, setMessages] = useState<Array<ChatMessage>>([]);  
   const socket = io('http://localhost:3000');
+  const userName = uniqueNamesGenerator({dictionaries: [animals]});
 
-  //Event to confirm a solid connection
-  /*socket.on('connect', () => {
-    console.log("connected!");
-  });*/
-
-  //Event to say server dc
-  /*socket.on('disconnect', () => {
-    console.log("disconnected!");
-  });*/
-
-  //Send current messages for testing purposes
-  socket.emit('message', {
-    id: 1,
-    message: "test message",
-    date: new Date()
-  });
-
-  //Request all current messages on the server
-  setInterval(() => {
-    socket.emit('getAllMessages', (response:ChatMessage[]) => {
-      console.log(response);
-    })  
-  }, 1000);
+  //Request all current messages on the server every 1000ms
+  socket.on('sendMessages', (response:ChatMessage[]) => {
+    if(response !== allMessages){
+      console.log("got messages...");
+      setMessages(response);
+    }
+  })
     
   return (
     <>
       <h1>Chat</h1>
       <ChatWindow {...allMessages}/>
-      <MessageAdder />
+      <br></br>
+      <MessageAdder userName={userName} />
     </>
   )
 }

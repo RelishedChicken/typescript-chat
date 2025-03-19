@@ -1,13 +1,25 @@
 import $ from 'jquery';
+import { io } from 'socket.io-client';
 
-export function MessageAdder(){
+export interface Props {
+    userName: string;
+  }
+
+export function MessageAdder(props: Props){
     
     const handleNewMessage = () => {
+        
+        const socket = io('http://localhost:3000');
         const input:JQuery<HTMLInputElement> = $('#inputBox');
 
         if(input.val() !== ""){
-            //Send a message to the server
-
+            console.log("sending message...");
+            socket.emit('message', {
+                id: Math.random() * 9999,
+                author: props.userName,
+                message: input.val(),
+                date: new Date()
+            });
         }else{
             console.log("Empty message box!");
         }
