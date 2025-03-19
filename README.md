@@ -1,4 +1,4 @@
-###Typescript Chat Client
+## Typescript Chat Client
 
 This is a simple chat app I've made to help myself learn Typescript, React (via Vite) with Socket.io for messaging.
 
