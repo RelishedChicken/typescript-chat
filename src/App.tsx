@@ -18,11 +18,12 @@ declare global{
 
 }
 
+const userName = uniqueNamesGenerator({dictionaries: [animals]});
+
 function App() {
 
   const [allMessages, setMessages] = useState<Array<ChatMessage>>([]);  
   const socket = io('http://localhost:3000');
-  const userName = uniqueNamesGenerator({dictionaries: [animals]});
 
   //Request all current messages on the server every 1000ms
   socket.on('sendMessages', (response:ChatMessage[]) => {
