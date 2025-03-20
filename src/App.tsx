@@ -16,7 +16,7 @@ declare global{
 
 }
   
-const socket = io('http://localhost:3000');
+const socket = io('https://typescript-chat-server-2a4af974e68f.herokuapp.com/');
 const userName = uniqueNamesGenerator({dictionaries: [animals]});
 
 function App() {
