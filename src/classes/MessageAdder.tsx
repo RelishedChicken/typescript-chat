@@ -2,6 +2,7 @@ import $ from 'jquery';
 import { io } from 'socket.io-client';
 
 export interface Props {
+    host: string;
     userName: string;
   }
 
@@ -9,7 +10,7 @@ export function MessageAdder(props: Props){
     
     const handleNewMessage = () => {
         
-        const socket = io('http://localhost:3000');
+        const socket = io(props.host);
         const input:JQuery<HTMLInputElement> = $('#inputBox');
 
         if(input.val() !== ""){

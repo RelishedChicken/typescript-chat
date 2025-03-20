@@ -16,7 +16,8 @@ declare global{
 
 }
   
-const socket = io('https://typescript-chat-server-2a4af974e68f.herokuapp.com/');
+const host = 'https://typescript-chat-server-2a4af974e68f.herokuapp.com/';
+const socket = io(host);
 const userName = uniqueNamesGenerator({dictionaries: [animals]});
 
 function App() {
@@ -36,7 +37,7 @@ function App() {
       <h1>Chat</h1>
       <ChatWindow {...allMessages}/>
       <br></br>
-      <MessageAdder userName={userName} />
+      <MessageAdder host={host} userName={userName} />
     </>
   )
 }
