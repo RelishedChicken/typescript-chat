@@ -16,7 +16,7 @@ export function ChatWindow(props: Props){
 
     const messageStyle = {
         width: "100%",
-        height: "50px",
+        minHeight: "50px",
         fontSize: "25px", 
         margin: "0",
         marginTop: "2px",
