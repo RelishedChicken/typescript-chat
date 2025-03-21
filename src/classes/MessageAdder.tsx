@@ -22,15 +22,22 @@ export function MessageAdder(props: Props){
                 date: new Date()
             });
             console.log("message sent.");
+            input.val("");
         }else{
             console.log("Empty message box!");
         }
         
     }
 
+    const handleKeyDown = (e:React.KeyboardEvent<HTMLInputElement>) => {
+        if(e.code === 'Enter'){
+            handleNewMessage();
+        }
+    }
+
     return(
         <div style={{width: "100%", height: "50px"}}>
-            <input id="inputBox" style={{
+            <input onKeyDown={handleKeyDown} id="inputBox" style={{
                 float: "left",
                 width: "calc(100% - 144px)",
                 borderRadius: "15px",

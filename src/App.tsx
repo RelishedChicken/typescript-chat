@@ -27,7 +27,15 @@ function App() {
   //Check for a connection
   socket.on("connect", () => {
     console.log("Succesfully connected with socket.io server");
-    console.log(socket.id);
+
+    //Ask for all messages - mainly for on load
+    socket.emit('getAllMessages', (response:ChatMessage[]) => {      
+      if(response !== allMessages){
+        console.log("got messages...");
+        setMessages(response);
+      }
+    })
+    
   });
 
   //Listen for message broadcasts
