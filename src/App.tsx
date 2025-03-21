@@ -15,8 +15,9 @@ declare global{
   }
 
 }
-  
+
 const host = 'wss://typescript-chat-server-2a4af974e68f.herokuapp.com';
+//const host = 'ws://localhost:3000';
 const socket = io(host);
 const userName = uniqueNamesGenerator({dictionaries: [animals]});
 
