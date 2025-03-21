@@ -44,7 +44,7 @@ export function ChatWindow(props: Props){
     return(
         <>
             <div style={{position: "relative", width: "calc(100%)", height: "100%", minHeight: "calc(100%) - 250px", maxHeight: "calc(100%) - 450px", borderRadius: "15px", border: "5px solid white"}}>
-                <div style={{width: "100%", minHeight: "100%", maxHeight: "100%", overflowY: "auto"}} id="messages">
+                <div style={{width: "100%", minHeight: "100%", maxHeight: "100%", overflowY: "auto", overflowWrap:"break-word"}} id="messages">
                     {Object.values(props.allMessages).map((item, index) => (
                         <p key={index} style={messageStyle}>
                             <span style={{color: (authorColours.get(item.author))}}>{(item.author === props.userName) ? "You" : item.author}</span>: {item.message}
