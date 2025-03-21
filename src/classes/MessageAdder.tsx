@@ -21,6 +21,7 @@ export function MessageAdder(props: Props){
                 message: input.val(),
                 date: new Date()
             });
+            console.log("message sent.");
         }else{
             console.log("Empty message box!");
         }

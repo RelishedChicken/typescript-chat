@@ -16,13 +16,19 @@ declare global{
 
 }
   
-const host = 'wss://typescript-chat-server-2a4af974e68f.herokuapp.com:80';
+const host = 'wss://typescript-chat-server-2a4af974e68f.herokuapp.com';
 const socket = io(host);
 const userName = uniqueNamesGenerator({dictionaries: [animals]});
 
 function App() {
 
-  const [allMessages, setMessages] = useState<Array<ChatMessage>>([]);
+  const [allMessages, setMessages] = useState<Array<ChatMessage>>([]);  
+
+  //Check for a connection
+  socket.on("connect", () => {
+    console.log("Succesfully connected with socket.io server");
+    console.log(socket.id);
+  });
 
   //Listen for message broadcasts
   socket.on('sendMessages', (response:ChatMessage[]) => {
