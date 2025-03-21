@@ -4,6 +4,7 @@ import { io } from 'socket.io-client';
 import { ChatWindow } from './classes/ChatWindow';
 import { MessageAdder } from './classes/MessageAdder';
 import { uniqueNamesGenerator, animals } from 'unique-names-generator';
+import $ from 'jquery';
 
 declare global{ 
 
@@ -35,7 +36,7 @@ function App() {
         setMessages(response);
       }
     })
-    
+
   });
 
   //Listen for message broadcasts
@@ -44,12 +45,13 @@ function App() {
       console.log("got messages...");
       setMessages(response);
     }
-  })
+  });
     
   return (
     <>
       <h1>Chat</h1>
-      <ChatWindow {...allMessages}/>
+      <h3>You are: {userName}</h3>
+      <ChatWindow userName={userName} allMessages={allMessages}/>
       <br></br>
       <MessageAdder host={host} userName={userName} />
     </>

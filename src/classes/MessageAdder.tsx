@@ -1,12 +1,21 @@
 import $ from 'jquery';
+import { useEffect } from 'react';
 import { io } from 'socket.io-client';
 
 export interface Props {
     host: string;
     userName: string;
-  }
+}
 
 export function MessageAdder(props: Props){
+
+    useEffect(() => {
+          //Keep message box scrolled to bottom
+          const messageBox = $("#messages")[0];
+          const messageBoxHeight = messageBox.clientHeight;
+          const contentHeight = messageBox.scrollHeight;
+          messageBox.scrollTop = contentHeight - messageBoxHeight;
+    })
     
     const handleNewMessage = () => {
         
