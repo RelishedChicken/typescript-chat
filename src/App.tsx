@@ -4,7 +4,6 @@ import { io } from 'socket.io-client';
 import { ChatWindow } from './classes/ChatWindow';
 import { MessageAdder } from './classes/MessageAdder';
 import { uniqueNamesGenerator, animals } from 'unique-names-generator';
-import $ from 'jquery';
 
 declare global{ 
 
